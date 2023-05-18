@@ -61,7 +61,7 @@
 									<i class="flaticon-bag"></i>
 									<span>0</span>
 								</div>
-								<a href="#">Shopping Cart</a>
+								<a href="/cart">Shopping Cart</a>
 							</div>
 						</div>
 					</div>
@@ -84,6 +84,7 @@
 						</ul>
 					</li>
 					<li><a href="#">Blog</a></li>
+					
 					<li>
 						@if (Route::has('login'))
 							@auth
@@ -91,6 +92,7 @@
 									<a href="#">({{ Auth::user()->name }})</a>
 									<ul class="sub-menu">
 										<li><a href="{{ route('admin.dashboard') }}">Dasboard</a></li>
+										<li><a href="{{ route('admin.categories') }}">Categories</a></li>
 										<li><a href="#">Profile</a></li>
 										<li>
 											<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Logout</a>

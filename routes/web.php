@@ -24,7 +24,7 @@ Route::get('/', HomeComponent::class);
 
 Route::get('/shop', ShopComponent::class);
 
-Route::get('/cart', CartComponent::class);
+Route::get('/cart', CartComponent::class)->name('product.cart');
 
 Route::Get('/checkout', CheckoutComponent::class);
 
@@ -49,4 +49,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
 
 Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function (){
     Route::get('/admin/dashboard', App\Http\Livewire\Admin\AdminDashboardComponent::class)->name('admin.dashboard');
+    Route::get('/admin/category', App\Http\Livewire\Admin\AdminCategoryComponent::class)->name('admin.categories');
+    Route::get('/admin/category/add', App\Http\Livewire\Admin\AdminAddCategory::class)->name('admin.add.category');
+    Route::get('/admin/category/edit/{category_id}', App\Http\Livewire\Admin\AdminEditCategory::class)->name('admin.edit.category');
 });

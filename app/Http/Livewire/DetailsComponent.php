@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
+use Cart;
 
 class DetailsComponent extends Component
 {
@@ -14,6 +15,15 @@ class DetailsComponent extends Component
     {
         $this->product_id = $product_id;
     }
+
+    public function store($product_id, $product_name, $product_price, $product_size)
+    {
+        Cart::add($product_id, $product_name, $product_price, $product_size)->associate('Apps\Models\Product');
+        session()->flash('success_message', 'Product Item Added');
+        return redirect()->route('product.cart');
+    }
+
+
 
     public function render()
     {

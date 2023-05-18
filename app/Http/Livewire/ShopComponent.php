@@ -4,8 +4,10 @@ namespace App\Http\Livewire;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\subCategory;
 use Illuminate\Support\Collection;
 use Livewire\Component;
+use Gloudemans\Shoppingcart\Facades\Cart as Cart;
 
 class ShopComponent extends Component
 {
@@ -18,6 +20,13 @@ class ShopComponent extends Component
         $this->products = new Collection();
 
         $this->loadProducts();
+    }
+
+    public function store($product_id, $product_name, $product_price, $product_size)
+    {
+        Cart::add($product_id, $product_name, $product_price, $product_size)->associate('Apps\Models\Product');
+        session()->flash('success_message', 'Product Item Added');
+        return redirect()->route('product.cart');
     }
 
     public function loadProducts()
@@ -36,6 +45,7 @@ class ShopComponent extends Component
     public function render()
     {
         $categories = Category::all();
+  
 
         return view('livewire.shop-component',['categories' => $categories])->layout('layouts.base');
     }

@@ -23,34 +23,13 @@
 							@foreach ($categories as $category) 
 								<li><a href="#">{{ $category->name }}'s wear</a>
 									<ul class="sub-menu">
-										<li><a href="#">Midi Dresses <span>(2)</span></a></li>
-										<li><a href="#">Maxi Dresses<span>(56)</span></a></li>
-										<li><a href="#">Prom Dresses<span>(36)</span></a></li>
-										<li><a href="#">Little Black Dresses <span>(27)</span></a></li>
-										<li><a href="#">Mini Dresses<span>(19)</span></a></li>
+										@foreach ($category->sub_categories as $item)
+											<li><a href="#">{{ $item->sub_category_name  }}</span></a></li>
+										@endforeach
 									</ul>
 								</li>
 							@endforeach
 						</ul>
-					</div>
-					<div class="filter-widget mb-0">
-						<h2 class="fw-title">refine by</h2>
-						<div class="price-range-wrap">
-							<h4>Price</h4>
-                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="10" data-max="270">
-								<div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 100%;"></div>
-								<span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;">
-								</span>
-								<span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;">
-								</span>
-							</div>
-							<div class="range-slider">
-                                <div class="price-input">
-                                    <input type="text" id="minamount">
-                                    <input type="text" id="maxamount">
-                                </div>
-                            </div>
-                        </div>
 					</div>
 					<div class="filter-widget mb-0">
 						<h2 class="fw-title">color by</h2>
@@ -122,16 +101,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="filter-widget">
-						<h2 class="fw-title">Brand</h2>
-						<ul class="category-menu">
-							<li><a href="#">Abercrombie & Fitch <span>(2)</span></a></li>
-							<li><a href="#">Asos<span>(56)</span></a></li>
-							<li><a href="#">Bershka<span>(36)</span></a></li>
-							<li><a href="#">Missguided<span>(27)</span></a></li>
-							<li><a href="#">Zara<span>(19)</span></a></li>
-						</ul>
-					</div>
 				</div>
 
 				<div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
@@ -143,9 +112,9 @@
 									<div class="tag-sale">{{ $product['featured'] == 1 ? 'ON SALE' : '' }}</div>
 									<img src="{{  asset('assets/img/product/6.jpg') }}" alt="">
 									<div class="pi-links">
-										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-										<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-										<a href="{{ route('product.details', ['product_id' => $product['id'] ]) }}" class="wishlist-btn"><i class="flaticon-eye"></i></a>
+										<a href="#" class="add-card" wire:click.prevent="store({{ $product['id'] }}, {{ $product['name'] }}, {{ $product['product_price'] }})"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+										<a href="#" class="wishlist-btn"><i class="flaticon-heart" ></i></a>
+										<a href="{{ route('product.details', ['product_id' => $product['id'] ]) }}" class="wishlist-btn"><i class="flaticon-view"></i></a>
 									</div>
 								</div>
 								<div class="pi-text">
